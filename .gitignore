@@ -485,3 +485,4 @@ $RECYCLE.BIN/
 API/activities.db
 API/activities.db-shm
 API/activities.db-wal
+API/activities.db
