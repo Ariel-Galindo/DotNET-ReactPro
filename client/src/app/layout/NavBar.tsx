@@ -5,14 +5,11 @@ import {
   Toolbar,
   Typography,
   MenuItem,
-  Button,
 } from "@mui/material";
+import { NavLink } from "react-router";
+import MenuItemLink from "../shared/components/MenuItemLink";
 
-type Props = {
-  openForm: () => void;
-};
-
-export default function NavBar({ openForm }: Props) {
+export default function NavBar() {
   return (
     <Box sx={{ flexGrow: 1, marginBottom: "2em" }}>
       <AppBar position="static" sx={{ backgroundColor: "#161925" }}>
@@ -24,7 +21,10 @@ export default function NavBar({ openForm }: Props) {
           }}
         >
           <Box>
-            <MenuItem sx={{ display: "flex", gap: 2 }}>
+            <MenuItem 
+              component={NavLink}
+              to="/"
+              sx={{ display: "flex", gap: 2 }}>
               <Group fontSize="large" />
               <Typography variant="h6" fontWeight="bold">
                 Activities
@@ -32,39 +32,14 @@ export default function NavBar({ openForm }: Props) {
             </MenuItem>
           </Box>
           <Box sx={{ display: "flex" }}>
-            <MenuItem
-              sx={{
-                fontSize: "14px",
-                textTransform: "uppercase",
-              }}
-            >
+            <MenuItemLink to="/activities">
               Activities
-            </MenuItem>
-            <MenuItem
-              sx={{
-                fontSize: "14px",
-                textTransform: "uppercase",
-              }}
-            >
-              About
-            </MenuItem>
-            <MenuItem
-              sx={{
-                fontSize: "14px",
-                textTransform: "uppercase",
-              }}
-            >
-              Contact
-            </MenuItem>
+            </MenuItemLink>
+            <MenuItemLink to="/createActivity">
+              Create Activity
+            </MenuItemLink>
           </Box>
-          <Button
-            size="large"
-            variant="contained"
-            color="info"
-            onClick={openForm}
-          >
-            New Activity
-          </Button>
+          <MenuItem>User Menu</MenuItem>
         </Toolbar>
       </AppBar>
     </Box>
