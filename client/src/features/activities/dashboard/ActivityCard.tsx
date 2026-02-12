@@ -8,14 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useActivities } from "../../../lib/hooks/useActivities";
+import { Link } from "react-router";
 
 type Props = {
   activity: Activity;
-  selectActivity: (id: string) => void;
 };
 
-export default function ActivityCard({ activity, selectActivity }: Props) {
-
+export default function ActivityCard({ activity }: Props) {
   const { deleteActivity } = useActivities();
 
   const formatted = new Intl.DateTimeFormat("es-ES", {
@@ -43,23 +42,26 @@ export default function ActivityCard({ activity, selectActivity }: Props) {
           <Chip label={activity.category} variant="outlined" />
           <Box display="flex" gap={1}>
             <Button
-            size="medium"
-            variant="contained"
-            sx={{ backgroundColor: "#23395B" }}
-            onClick={() => selectActivity(activity.id)}
-          >
-            View
-          </Button>
-          <Button
-            size="medium"
-            variant="outlined"
-            color="inherit"
-            onClick={async () => await deleteActivity.mutateAsync(activity.id)}
-            loading={deleteActivity.isPending}
-            loadingPosition="start"
-          >
-            Delete
-          </Button>
+              component={Link}
+              to={`/activities/${activity.id}`}
+              size="medium"
+              variant="contained"
+              sx={{ backgroundColor: "#23395B" }}
+            >
+              View
+            </Button>
+            <Button
+              size="medium"
+              variant="outlined"
+              color="inherit"
+              onClick={async () =>
+                await deleteActivity.mutateAsync(activity.id)
+              }
+              loading={deleteActivity.isPending}
+              loadingPosition="start"
+            >
+              Delete
+            </Button>
           </Box>
         </CardActions>
       </CardContent>
